@@ -1,0 +1,382 @@
+/* --- Variables & Basic Setup --- */
+:root {
+    --color-primordial-bg: #0a192f; /* Deep dark blue */
+    --color-cellular-bg: #0d2a4c;
+    --color-neural-bg: #103c6a;
+    --color-symbolic-bg: #1a4a7a; /* Gradual lightening */
+    --color-external-bg: #2a5a8a;
+    --color-silicon-bg: #333; /* Shift to darker, tech feel */
+    --color-merge-bg: #222; /* Even darker */
+
+    --color-neural-glow: #00f7ff;   /* Electric cyan */
+    --color-silicon-light: #e000ff; /* Vibrant magenta/purple */
+    --color-accent: #f0a000; /* Warm accent for buttons/links */
+
+    --color-text-light: #e6f1ff;
+    --color-text-mid: #a8c0e0;
+    --color-text-dark: #333; /* For potential light backgrounds if design changes */
+
+    --font-primary: 'Georgia', serif;
+    --font-secondary: 'Helvetica Neue', 'Arial', sans-serif;
+    --font-monospace: 'Courier New', monospace; /* For code/data feel */
+}
+
+/* --- General Styling --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-light);
+    background-color: var(--color-primordial-bg); /* Default background */
+    line-height: 1.7;
+    transition: background-color 0.5s ease;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3 {
+    font-family: var(--font-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    color: var(--color-text-light); /* Ensure headings are light */
+}
+
+h1 { font-size: 2.8rem; margin-bottom: 1.5rem;}
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1rem;
+    max-width: 70ch; /* Improve readability */
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--color-text-light);
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+main {
+    padding: 2rem 5%; /* Add some padding to main content areas */
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 5%;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--color-text-mid);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Header & Navigation --- */
+header {
+    padding: 1rem 5%;
+    background-color: rgba(10, 25, 47, 0.8); /* Semi-transparent dark blue */
+    position: sticky; /* Keep nav visible */
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px); /* Optional blur effect */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Center nav items */
+    gap: 2rem; /* Space between items */
+}
+
+header nav a {
+    color: var(--color-text-light);
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+header nav a:hover, header nav a:focus, header nav a.active { /* Add 'active' class via JS later */
+    border-bottom-color: var(--color-accent);
+}
+
+
+/* --- Homepage Hero --- */
+#homepage .hero {
+    height: calc(100vh - 60px); /* Adjust based on header height */
+    display: flex;
+    flex-direction: column; /* Stack text on top */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+    overflow: hidden;
+    margin: 0; /* Override default main padding */
+    max-width: 100%; /* Ensure it spans full width */
+}
+
+#homepage .hero-visual {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* *** REPLACE 'hero.jpg' with your actual image filename *** */
+    background: url('../assets/images/hero.jpg') no-repeat center center/cover;
+    z-index: -1;
+    opacity: 0.4; /* Dim the background image */
+    /* Consider adding subtle animation: e.g., slow zoom or pan */
+}
+
+ #homepage .hero-text {
+    z-index: 1; /* Ensure text is above visual */
+    background-color: rgba(10, 25, 47, 0.5); /* Slight dark background for text readability */
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 800px;
+}
+
+#homepage .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add shadow for contrast */
+}
+
+#homepage .hero p {
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    max-width: 60ch;
+    margin: 0 auto 1.5rem auto; /* Center paragraph */
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    padding: 0.8rem 1.8rem;
+    border-radius: 5px;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover, .cta-button:focus {
+    background-color: lighten(var(--color-accent), 10%);
+    color: var(--color-text-dark);
+    transform: translateY(-2px);
+    text-decoration: none; /* Remove underline on hover */
+}
+
+
+/* --- Narrative Page Styling --- */
+#narrative-page h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.narrative-stage {
+    min-height: 70vh; /* Reduced height slightly */
+    padding: 5% 10%;
+    display: grid; /* Use grid for more control */
+    grid-template-columns: 1fr 1fr; /* Default two columns */
+    align-items: center;
+    gap: 4rem; /* Increase gap */
+    opacity: 0; /* For fade-in on scroll - controlled by JS */
+    transition: opacity 0.9s ease-out, background-color 0.5s ease; /* Smooth transitions */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Alternate layout for every other stage */
+ .narrative-stage:nth-child(even) {
+    grid-template-columns: 1fr 1fr; /* Keep same for now, but could reverse: .narrative-image first */
+}
+ .narrative-stage:nth-child(even) .narrative-image {
+    grid-column: 2 / 3; /* Image on the right */
+    grid-row: 1 / 2;
+}
+.narrative-stage:nth-child(even) .narrative-content {
+    grid-column: 1 / 2; /* Text on the left */
+    grid-row: 1 / 2;
+}
+ .narrative-stage:nth-child(odd) .narrative-image {
+    grid-column: 1 / 2; /* Image on the left */
+    grid-row: 1 / 2;
+}
+.narrative-stage:nth-child(odd) .narrative-content {
+    grid-column: 2 / 3; /* Text on the right */
+    grid-row: 1 / 2;
+}
+
+
+.narrative-stage.visible { /* Class added by JS when element scrolls into view */
+    opacity: 1;
+}
+
+/* Background Color Application - Apply styles to the stages directly */
+#primordial { background-color: var(--color-primordial-bg); }
+#carbon-compilers { background-color: var(--color-cellular-bg); }
+#neural-network { background-color: var(--color-neural-bg); }
+#neural-network h2, #neural-network p { color: var(--color-neural-glow); } /* Example text color change */
+#symbolic-echoes { background-color: var(--color-symbolic-bg); }
+#externalizing-thought { background-color: var(--color-external-bg); }
+#silicon-dawn { background-color: var(--color-silicon-bg); }
+#silicon-dawn h2, #silicon-dawn p { color: var(--color-silicon-light); } /* Example text color change */
+#imminent-merge { background-color: var(--color-merge-bg); }
+ #imminent-merge h2, #imminent-merge p { color: var(--color-silicon-light); }
+
+.narrative-image img {
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    /* Add potential subtle glow effect matching stage color */
+     transition: transform 0.4s ease;
+}
+.narrative-image img:hover {
+    transform: scale(1.03);
+}
+
+.narrative-content h2 {
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+/* --- Gallery Page (Basic Grid Placeholder) --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+ .gallery-item img {
+     margin-bottom: 0.5rem;
+     border-radius: 4px;
+ }
+ .gallery-item caption {
+     font-size: 0.9rem;
+     color: var(--color-text-mid);
+     font-style: italic;
+ }
+
+/* --- Scenarios Page --- */
+.scenario-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.scenario-container h2 {
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-accent);
+}
+
+.scenario-container .choices button {
+    display: block; /* Stack buttons */
+    margin: 0.8rem 0;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    width: 100%; /* Make buttons fill container width */
+    max-width: 400px; /* Optional max width */
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.scenario-container .choices button:hover {
+    background-color: lighten(var(--color-accent), 10%);
+}
+
+.scenario-container .consequence {
+    margin-top: 1.5rem;
+    font-style: italic;
+    background-color: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--color-silicon-light); /* Highlight consequence */
+}
+
+
+/* --- Reflections Page --- */
+#reflections-page article {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#reflections-page article:last-child {
+    border-bottom: none;
+}
+#reflections-page h2 {
+    color: var(--color-accent);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+
+    header nav ul {
+        gap: 1rem;
+    }
+    header nav a {
+        font-size: 0.9rem;
+    }
+
+    #homepage .hero {
+        height: auto; /* Let content determine height */
+        min-height: 80vh;
+    }
+
+    .narrative-stage {
+        grid-template-columns: 1fr; /* Stack image and text */
+        gap: 2rem;
+        padding: 8% 5%; /* Adjust padding */
+    }
+    /* Ensure correct order when stacked */
+    .narrative-stage:nth-child(even) .narrative-image,
+    .narrative-stage:nth-child(odd) .narrative-image {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2; /* Image first */
+    }
+    .narrative-stage:nth-child(even) .narrative-content,
+    .narrative-stage:nth-child(odd) .narrative-content {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3; /* Text second */
+    }
+    .narrative-content h2 {
+        font-size: 1.9rem;
+    }
+}
